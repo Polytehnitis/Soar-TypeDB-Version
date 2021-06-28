@@ -1,0 +1,450 @@
+##Soar database schema
+## File must have the extension .tql 
+## The current extension .gql is meant to make it easyer to read in Visual Studio Code.
+
+## Schema smem_db
+## As defined in the file Soar/Core/SoarKernel/src/semantic_memory/smem_db.cpp lines 19-45
+
+define
+
+versions sub entity,
+    owns system @key,
+    owns version_number,
+    system sub attribute, value string,
+    version_number sub attribute, value string;
+
+smem_persistent_variables sub entity,
+    owns variable_id @key,
+    owns variable_value,
+    variable_id sub attribute, value long,
+    variable_value sub attribute, value long;
+
+smem_symbols_type sub entity,
+    owns s_id @key,
+    owns symbol_type,
+    s_id sub attribute, value long,
+    symbol_type sub attribute, value long;
+
+smem_symbols_integer sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value long;
+
+smem_symbols_float sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value double; 
+
+smem_symbols_string sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value string;
+
+smem_lti sub entity,
+    owns lti_id @key,
+    owns total_augmentations,
+    owns activation_base_level,
+    owns activations_total,
+    owns activations_last,
+    owns activations_first,
+    owns activation_spread,
+    owns activation_value,
+    owns lti_augmentations,
+    lti_id sub attribute, value long,
+    total_augmentations, sub attribute,value long,
+    activation_base_level, sub attribute, value double,
+    activations_total, sub attribute, value double,
+    activations_last, sub attribute, value long,
+    activations_first, sub attribute, value long,
+    activation_spread, sub attribute, value double,
+    activation_value, sub attribute, value double
+    lti_augmentations, sub attribute, value long;
+
+smem_activation_history sub entity,
+    owns lti_id @key,
+    owns t1,
+    owns t2,
+    owns t3,
+    owns t4,
+    owns t5,
+    owns t6,
+    owns t7,
+    owns t8,
+    owns t9,
+    owns t10,
+    owns touch1,
+    owns touch2,
+    owns touch3,
+    owns touch4,
+    owns touch5,
+    owns touch6,
+    owns touch7,
+    owns touch8,
+    owns touch9,
+    owns touch10,
+    t1 sub attribute, value long,
+    t2 sub attribute, value long,
+    t3 sub attribute, value long,
+    t4 sub attribute, value long,
+    t5 sub attribute, value long,
+    t6 sub attribute, value long,
+    t7 sub attribute, value long,
+    t8 sub attribute, value long,
+    t9 sub attribute, value long,
+    t10 sub attribute, value long,
+    touch1 sub attribute, value double,
+    touch2 sub attribute, value double,
+    touch3 sub attribute, value double,
+    touch4 sub attribute, value double,
+    touch5 sub attribute, value double,
+    touch6 sub attribute, value double,
+    touch7 sub attribute, value double,
+    touch8 sub attribute, value double,
+    touch9 sub attribute, value double,
+    touch10 sub attribute, value double;
+
+smem_augmentations sub entity,
+    owns lti_id,
+    owns attribute_s_id,
+    owns value_constant_s_id,
+    owns value_lti_id,
+    owns activation_value,
+    owns edge_weight,
+    lti_id sub attribute, value long,
+    attribute_s_id sub attribute, value long,
+    value_constant_s_id sub attribute, value long,
+    value_lti_id sub attribute, value long,
+    activation_value sub attribute, value double,
+    edge_weight sub attribute, value double;
+
+smem_attribute_frequency sub entity,
+    owns attribute_s_id @key,
+    owns edge_frequency,
+    attribute_s_id sub attribute, value long,
+    edge_frequency sub attribute, value long;
+
+smem_wmes_constant_frequency sub entity,
+    owns attribute_s_id,
+    owns value_constant_s_id,
+    owns edge_frequency,
+    attribute_s_id sub attribute, value long,
+    value_constant_s_id sub attribute, value long,
+    edge_frequency sub attribute, value long;
+
+smem_wmes_lti_frequency sub entity,
+    owns attribute_s_id,
+    owns value_lti_id,
+    owns edge_frequency,
+    attribute_s_id sub attribute, value long,
+    value_lti_id sub attribute, value long,
+    edge_frequency sub attribute, value long;
+
+smem_ascii sub entity,
+    owns ascii_num @key,
+    owns ascii_chr,
+    ascii_num sub attribute, value long,
+    ascii_chr sub attribute, value string;
+
+smem_prohibited sub entity,
+    owns lti_id @key,
+    owns prohibited,
+    owns dirty,
+    lti_id sub attribute, value long,
+    prohibited sub attribute, value long,
+    dirty sub attribute, value long;
+
+## just for spreading:
+
+smem_constants_store sub entity,
+    owns smem_act_max,
+    owns smem_act_low,
+    smem_act_max sub attribute, value double,
+    smem_act_low sub attribute, value double;
+
+smem_likelihood_trajectories sub entity,
+    owns lti_id,
+    owns lti1,
+    owns lti2,
+    owns lti3,
+    owns lti4,
+    owns lti5,
+    owns lti6,
+    owns lti7,
+    owns lti8,
+    owns lti9,
+    owns lti10,
+    owns valid_bit,
+    lti_id sub attribute, value long,
+    lti1 sub attribute, value long,
+    lti2 sub attribute, value long,
+    lti3 sub attribute, value long,
+    lti4 sub attribute, value long,
+    lti5 sub attribute, value long,
+    lti6 sub attribute, value long,
+    lti7 sub attribute, value long,
+    lti8 sub attribute, value long,
+    lti9 sub attribute, value long,
+    lti10 sub attribute, value long,
+    valid_bit sub attribute, value long;
+
+  
+ smem_likelihoods sub entity,   
+    owns lti_j @key,
+    owns lti_i @key,
+    owns num_appearances_i_j,
+    lti_j sub attribute, value long,
+    lti_i sub attribute, value long,
+    num_appearances_i_j sub attribute, value double;
+    
+
+smem_trajectory_num sub entity,
+    owns lti_id @key,
+    owns num_appearances,
+    lti_id sub attribute, value long,
+    num_appearances sub attribute, value double; 
+
+
+smem_current_spread sub entity,
+    owns lti_id @key,
+    owns num_appearances_i_j,
+    owns num_appearances,
+    key lti_source,
+    owns sign,
+    lti_id sub attribute, value long,
+    num_appearances_i_j sub attribute, value double,
+    num_appearances sub attribute, value double
+    lti_source sub attribute, value long;
+
+
+smem_uncommitted_spread sub entity,
+    owns lti_id @key,
+    owns lti_source @key,
+    owns num_appearances_i_j,
+    owns num_appearances,
+    owns sign;
+    lti_id sub attribute, value long;
+    lti_source sub attribute, value long;
+    num_appearances_i_j sub attribute, value double,
+    num_appearances sub attribute, value double;
+
+smem_committed_spread sub entity,
+    owns lti_id @key,
+    owns lti_source @key,
+    owns num_appearances_i_j,
+    owns num_appearances,
+    lti_source sub attribute, value long,
+    lti_id sub attribute, value long;
+    num_appearances_i_j sub attribute, value double,
+    num_appearances sub attribute, value double;
+
+smem_current_spread_activations sub entity,
+     owns lti_id @key,
+     owns activation_base_level,
+     owns activation_spread,
+     owns activation_value,
+     lti_id sub attribute, value long,
+     activation_base_level sub attribute, value double,
+     activation_spread sub attribute, value double,
+     activation_value sub attribute, value double;
+
+smem_to_delete sub entity,
+    owns lti_id @key,
+    lti_id sub attribute, value long;
+
+smem_invalid_parents sub entity,
+    owns lti_id @key,
+    lti_id sub attribute, value long;
+
+
+insert $x isa smem_constants_store, has smem_act_max 9223372036854775808, has smem_act_low -1000000000; ## Are these values nessesary? What do they mean?
+
+insert $x isa smem_ascii, has ascii_num 65, has ascii_chr "A";
+insert $x isa smem_ascii, has ascii_num 66, has ascii_chr "B";
+insert $x isa smem_ascii, has ascii_num 67, has ascii_chr "C";
+insert $x isa smem_ascii, has ascii_num 68, has ascii_chr "D";
+insert $x isa smem_ascii, has ascii_num 69, has ascii_chr "E";
+insert $x isa smem_ascii, has ascii_num 70, has ascii_chr "F";
+insert $x isa smem_ascii, has ascii_num 71, has ascii_chr "G";
+insert $x isa smem_ascii, has ascii_num 72, has ascii_chr "H";
+insert $x isa smem_ascii, has ascii_num 73, has ascii_chr "I";
+insert $x isa smem_ascii, has ascii_num 74, has ascii_chr "J";
+insert $x isa smem_ascii, has ascii_num 75, has ascii_chr "K";
+insert $x isa smem_ascii, has ascii_num 76, has ascii_chr "L";
+insert $x isa smem_ascii, has ascii_num 77, has ascii_chr "M";
+insert $x isa smem_ascii, has ascii_num 78, has ascii_chr "N";
+insert $x isa smem_ascii, has ascii_num 79, has ascii_chr "O";
+insert $x isa smem_ascii, has ascii_num 80, has ascii_chr "P";
+insert $x isa smem_ascii, has ascii_num 81, has ascii_chr "Q";
+insert $x isa smem_ascii, has ascii_num 82, has ascii_chr "R";
+insert $x isa smem_ascii, has ascii_num 83, has ascii_chr "S";
+insert $x isa smem_ascii, has ascii_num 84, has ascii_chr "T";
+insert $x isa smem_ascii, has ascii_num 85, has ascii_chr "U";
+insert $x isa smem_ascii, has ascii_num 86, has ascii_chr "V";
+insert $x isa smem_ascii, has ascii_num 87, has ascii_chr "W";
+insert $x isa smem_ascii, has ascii_num 88, has ascii_chr "X";
+insert $x isa smem_ascii, has ascii_num 89, has ascii_chr "Y";
+insert $x isa smem_ascii, has ascii_num 90, has ascii_chr "Z";
+
+## Schema of episodic_memory 
+##As defined in the file: Soar/Core/SoarKernel/src/episodic_memory/episodic_memory.cpp lines 820-830
+
+versions sub entity,
+   owns system @key,
+   owns version_number,
+   system sub attribute, value string,
+   version_number sub attribute, value string;
+
+## add_structure("CREATE TABLE IF NOT EXISTS epmem_persistent_variables (variable_id INTEGER PRIMARY KEY,variable_value NONE)");
+epmem_persistent_variables sub entity,
+   owns variable_id @key,
+   owns variable_value,                        ## If the value is NONE then is this necessary?
+   variable_id sub attribute, value long,
+   variable_value sub attribute, value long;   ## As above. Is this necessary?
+
+
+epmem_rit_left_nodes sub entity,
+   owns rit_min,
+   owns rit_max,
+   rit_min sub attribute, value long,
+   rit_max sub attribute, value long;
+
+
+epmem_rit_right_nodes sub entity,
+   owns rit_id,
+   rit_id sub attribute, value long;
+
+
+epmem_symbols_type sub entity,
+    owns s_id @key,
+    owns symbol_type,
+    s_id sub attribute, value long,
+    symbol_type sub attribute, value long;
+
+
+epmem_symbols_integer sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value long;
+
+
+epmem_symbols_float sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value double;
+
+
+epmem_symbols_string sub entity,
+    owns s_id @key,
+    owns symbol_value,
+    s_id sub attribute, value long,
+    symbol_value sub attribute, value string;
+
+## lines 961-971
+
+epmem_nodes sub entity,
+    owns n_id,
+    owns lti_id,
+    n_id sub attribute, value long,
+    lti_id sub attribute, value long;
+
+    
+epmem_episodes sub entity,
+    owns episode_id @key,
+    episode_id sub attribute, value long;
+
+    
+pmem_wmes_constant_now sub entity,
+    owns wc_id,
+    owns start_episode_id,
+    wc_id sub attribute, value long,
+    start_episode_id sub attribute, value long;
+
+    
+epmem_wmes_identifier_now sub entity,   
+    owns c,
+    owns start_episode_id,
+    owns lti_id,
+    lti_id sub attribute, value long,
+    start_episode_id sub attribute, value long,
+    lti_id sub attribute, value long;
+
+    
+epmem_wmes_constant_point sub entity,
+    owns wc_id,
+    owns episode_id,
+    wc_id sub attribute, value long,
+    episode_id sub attribute, value long;
+
+
+epmem_wmes_identifier_point sub entity,
+    owns wc_id,
+    owns episode_id,
+    owns lti_id,
+    wc_id sub attribute, value long,
+    episode_id sub attribute, value long,
+    lti_id sub attribute, value long;
+   
+
+epmem_wmes_constant_range sub entity,
+    owns rit_id,
+    owns start_episode_id,
+    owns end_episode_id,
+    owns wc_id,
+    rit_id sub attribute, value long,
+    start_episode_id sub attribute, value long,
+    end_episode_id sub attribute, value long,
+    wc_id sub attribute, value long;
+
+    
+    
+epmem_wmes_identifier_range sub entity,
+    owns rit_id,
+    owns start_episode_id,
+    owns end_episode_id,
+    owns wi_id,
+    owns lti_id,
+    rit_id sub attribute, value long,
+    start_episode_id sub attribute, value long,
+    end_episode_id sub attribute, value long,
+    wi_id sub attribute, value long,
+    lti_id sub attribute, value long;
+
+
+## add_structure("CREATE TABLE IF NOT EXISTS epmem_wmes_constant (wc_id INTEGER PRIMARY KEY AUTOINCREMENT,parent_n_id INTEGER,attribute_s_id INTEGER, value_s_id INTEGER)");
+## AUTOINCREMENT command is not supported yet in DB side. Must be  implemented in client side.
+epmem_wmes_constant sub entity,
+    owns wc_id @key,
+    owns parent_n_id,
+    owns attribute_s_id,
+    owns value_s_id,
+    wc_id sub attribute, value long,
+    parent_n_id sub attribute, value long,
+    attribute_s_id sub attribute, value long,
+    value_s_id sub attribute, value long;
+
+## add_structure("CREATE TABLE IF NOT EXISTS epmem_wmes_identifier (wi_id INTEGER PRIMARY KEY AUTOINCREMENT,parent_n_id INTEGER,attribute_s_id INTEGER,child_n_id INTEGER, last_episode_id INTEGER)");
+## AUTOINCREMENT command is not supported yet in DB side. Must be  implemented in client side.
+epmem_wmes_identifier sub entity,
+    owns wc_id @key, 
+    owns parent_n_id,
+    owns attribute_s_id,
+    owns child_n_id,
+    owns last_episode_id,
+    wc_id sub attribute, value long,
+    parent_n_id sub attribute, value long,
+    attribute_s_id sub attribute, value long,
+    child_n_id sub attribute, value long,
+    last_episode_id sub attribute, value long;
+
+
+    
+epmem_ascii sub entity,
+    owns ascii_num @key,
+    owns ascii_chr,
+    ascii_num sub attribute, value long,
+    ascii_chr sub attribute, value string;
